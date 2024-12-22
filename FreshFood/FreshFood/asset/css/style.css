@@ -1,0 +1,101 @@
+/* Mau trang web */
+:root {
+  --primary-color: #561c24;
+  --background-color: #6d2932;
+  --second-color: #c7b7a3;
+  --grey: #e8d8c4;
+  --while: #ffffff;
+}
+
+/* font chu trang web */
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* restart tag a (link) */
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+body,
+html {
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+/* start nav */
+.nav{
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  background-color: var(--primary-color);
+  top: 0;
+  left: 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.menu-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item{
+  margin-left: 16px;
+  font-weight: 600;
+  padding: 18px 20px;
+  border-radius: 3px;
+  color: var(--second-color);
+  transition: 0.2s ease-in-out;
+}
+.menu-item :hover{
+  color: var(--primary-color);
+  background-color: var(--second-color);
+  border-radius: 16px;
+  padding: 10px 10px;
+}
+
+.menu .active{
+  color: var(--primary-color);
+  background-color: var(--second-color);
+  border-radius: 16px;
+  padding: 10px 10px;
+}
+
+.logo{
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--grey);
+}
+
+.cart-btn{
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  font-weight: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey);
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.cart-btn :hover{
+  color: var(--primary-color);
+  background-color: var(--grey);
+  border-radius: 16px;
+  padding: 10px 10px;
+}
+/* the end nav */
