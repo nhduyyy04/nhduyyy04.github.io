@@ -1,0 +1,223 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 
+     NỀN (gradient pastel hồng -> xanh) 
+     Dùng tông nhẹ, tạo cảm giác thanh lịch 
+  */
+  body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #101820, #3c4047);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* -------------------------------------------------
+     BÌ THƯ (wrapper) - Kích thước 550 x 320
+     Chọn màu hồng pastel (#FFCDD2) làm màu chính
+  -------------------------------------------------- */
+  .wrapper {
+    width: 550px;
+    height: 320px;
+    background-color: #FFCDD2; /* Pastel đỏ hồng */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
+  
+  /* Phóng to nhẹ khi hover */
+  .wrapper:hover {
+    transform: scale(1.05);
+  }
+  
+  /* -------------------------------------------------
+     NẮP THƯ (lid)
+     Vì bì thư 550x320 => nửa width = 275, nửa height = 160
+  -------------------------------------------------- */
+  .lid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0;
+    border-right: 275px solid transparent;
+    border-bottom: 160px solid transparent;
+    border-left: 275px solid transparent;
+    transform-origin: top;
+    transition: transform 0.25s linear;
+  }
+  
+  /* 
+     Nắp 1 (phía trên) - màu hồng đậm hơn 
+     (thay #F8BBD0 bằng #F48FB1) 
+  */
+  .lid.one {
+    border-top: 160px solid #F48FB1;
+    transform: rotateX(0deg);
+    z-index: 3;
+    transition-delay: 0.75s;
+  }
+  
+  /* 
+     Nắp 2 (bên dưới nắp 1) - màu hồng đậm 
+     (thay #EF9A9A bằng #E57373)
+  */
+  .lid.two {
+    border-top: 160px solid #E57373;
+    transform: rotateX(90deg);
+    z-index: 1;
+    transition-delay: 0.5s;
+  }
+  
+  /* -------------------------------------------------
+     THÂN BÌ THƯ (envelope)
+     Viền bì thư hồng sáng hơn
+  -------------------------------------------------- */
+  .envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0;
+    border-top: 160px solid transparent;
+    border-right: 275px solid #FFC1CC;
+    border-bottom: 160px solid #FFC1CC;
+    border-left: 275px solid #FFC1CC;
+    z-index: 2;
+    border-radius: 0 0 8px 8px; 
+  }
+  
+  /* -------------------------------------------------
+     LÁ THƯ (letter)
+     Ban đầu: top 15%, màu trắng
+  -------------------------------------------------- */
+  .letter {
+    position: absolute;
+    top: 15%;
+    width: 90%;
+    height: 70%;
+    background-color: #FFFFFF; 
+    border-radius: 10px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: 
+      background-color 0.5s ease, 
+      transform 0.5s ease;
+  }
+  
+  .letter p {
+    font-size: 22px; 
+    color: #3B4049;
+    line-height: 1.5;
+    user-select: none;
+  }
+  
+  /* 
+     HOVER MỞ BÌ THƯ => mở nắp + lá thư trồi lên
+     - Nắp 1 => rotateX(90deg)
+     - Nắp 2 => rotateX(180deg)
+     - Lá thư => translateY(-190px) & đổi màu xanh pastel
+  */
+  .wrapper:hover .lid.one {
+    transform: rotateX(90deg);
+    transition-delay: 0s;
+  }
+  
+  .wrapper:hover .lid.two {
+    transform: rotateX(180deg);
+    transition-delay: 0.25s;
+  }
+  
+  .wrapper:hover .letter {
+    transform: translateY(-190px);
+    background-color: #C8E6C9; /* Xanh pastel nhẹ */
+    transition-delay: 0.5s;
+  }
+  
+  /* -------------------------------------------------
+     TUYẾT RƠI (được tạo bởi JS)
+  -------------------------------------------------- */
+  .snowflake {
+    position: fixed;
+    top: -5%;
+    color: #fff;
+    pointer-events: none;
+    font-size: 1.2rem;
+    z-index: 1;
+    animation-name: snow;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.8;
+  }
+  
+  @keyframes snow {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    body {
+      /* Cho khoảng trống để không bị tràn */
+      padding: 20px;
+    }
+  
+    .wrapper {
+      width: 100%;
+      max-width: 350px; /* Giới hạn tối đa trên di động */
+      height: auto;
+      border-radius: 6px;
+    }
+  
+    /* Bì thư bớt quá to: scale theo kích thước thực tế */
+    .wrapper::before,
+    .wrapper::after,
+    .lid,
+    .envelope {
+      border-right-width: 50%;
+      border-left-width: 50%;
+      border-top-width: 80px;   /* Giảm chiều cao nắp */
+      border-bottom-width: 80px;
+    }
+  
+    .letter {
+      top: 20%;
+      width: 85%;
+      height: 60%;
+    }
+  
+    .letter p {
+      font-size: 18px;
+      padding: 10px;
+    }
+  
+    /* Khi hover trên mobile (chạm) không hẳn tiện,
+       nhưng vẫn giữ hiệu ứng (có thể thay bằng JS click) */
+    .wrapper:hover {
+      transform: scale(1.02);
+    }
+  
+    .wrapper:hover .letter {
+      transform: translateY(-100px);
+    }
+  }
